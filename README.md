@@ -2,7 +2,6 @@
 
 A reproducible experimental framework that applies supervised machine learning to detect and predict flaky tests in CI/CD environments.
 
-
 ![License](https://img.shields.io/github/license/srivastava-rajeev/flakiness-experiment-temp)
 
 ![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flakiness-experiment-temp)
@@ -23,13 +22,13 @@ This project demonstrates how supervised machine learning can proactively detect
 
 ## Key Contributions
 
-- End-to-end experimental framework for flaky test research
-- Controlled flakiness injection within a System Under Test (SUT)
-- Automated execution harness for repeated test runs
-- Feature engineering from historical test outcomes
-- Supervised ML-based flaky test prediction
-- CI policy simulation to evaluate reliability impact
-- Fully reproducible pipeline with versioned dependencies
+- End-to-end experimental framework for flaky test research  
+- Controlled flakiness injection within a System Under Test (SUT)  
+- Automated execution harness for repeated test runs  
+- Feature engineering from historical test outcomes  
+- Supervised ML-based flaky test prediction  
+- CI policy simulation to evaluate reliability impact  
+- Fully reproducible pipeline with versioned dependencies  
 
 ---
 
@@ -37,23 +36,23 @@ This project demonstrates how supervised machine learning can proactively detect
 
 The framework consists of the following layers:
 
-### 1. System Under Test (SUT)
-Node.js + Express application with controlled flakiness injection.
+1. **System Under Test (SUT)**  
+   Node.js + Express application with controlled flakiness injection.
 
-### 2. Playwright Test Suite
-Stable and intentionally flaky tests to generate ground truth.
+2. **Playwright Test Suite**  
+   Stable and intentionally flaky tests to generate ground truth.
 
-### 3. Execution Harness
-Automates repeated test execution and collects logs.
+3. **Execution Harness**  
+   Automates repeated test execution and collects logs.
 
-### 4. Log Aggregation & Feature Engineering
-Extracts statistical features from historical runs.
+4. **Log Aggregation & Feature Engineering**  
+   Extracts statistical features from historical runs.
 
-### 5. Machine Learning Pipeline
-Trains classification models (Scikit-learn / XGBoost).
+5. **Machine Learning Pipeline**  
+   Trains classification models (Scikit-learn / XGBoost).
 
-### 6. Evaluation & CI Simulation
-Measures predictive performance and potential CI stability improvements.
+6. **Evaluation & CI Simulation**  
+   Measures predictive performance and potential CI stability improvements.
 
 ---
 
@@ -80,13 +79,13 @@ flakiness-experiment/
 
 ## Technology Stack
 
-- Python
-- Node.js / Express
-- Playwright
-- Pandas
-- Scikit-learn
-- XGBoost
-- GitHub Actions (CI)
+- Python  
+- Node.js / Express  
+- Playwright  
+- Pandas  
+- Scikit-learn  
+- XGBoost  
+- GitHub Actions (CI)  
 
 ---
 
@@ -121,11 +120,12 @@ python run_experiment.py
 ```
 
 This will:
-- Start the SUT
-- Execute Playwright tests multiple times
-- Aggregate logs
-- Train ML models
-- Output evaluation metrics
+
+- Start the SUT  
+- Execute Playwright tests multiple times  
+- Aggregate logs  
+- Train ML models  
+- Output evaluation metrics  
 
 ---
 
@@ -170,10 +170,10 @@ python3 ml/train.py
 
 ## Output Artifacts
 
-- `data/raw/aggregated_logs.csv`
-- Classification report (terminal output)
-- ROC-AUC score
-- Confusion matrix (if generated)
+- `data/raw/aggregated_logs.csv`  
+- Classification report (terminal output)  
+- ROC-AUC score  
+- Confusion matrix (if generated)  
 
 ---
 
