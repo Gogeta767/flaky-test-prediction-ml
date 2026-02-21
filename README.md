@@ -2,6 +2,15 @@
 
 A reproducible experimental framework that applies supervised machine learning to detect and predict flaky tests in CI/CD environments.
 
+
+![License](https://img.shields.io/github/license/srivastava-rajeev/flakiness-experiment-temp)
+
+![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flakiness-experiment-temp)
+
+![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flakiness-experiment-temp)
+
+![CI](https://github.com/srivastava-rajeev/flakiness-experiment-temp/actions/workflows/python-ci.yml/badge.svg)
+
 ---
 
 ## Overview
