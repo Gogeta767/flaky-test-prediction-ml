@@ -55,6 +55,40 @@ Trains classification models (Scikit-learn / XGBoost).
 Measures predictive performance and potential CI stability improvements.
 
 ---
+## Experimental Pipeline Overview
+
+The experimental workflow follows a structured end-to-end pipeline:
+
+SUT → Playwright Tests → Execution Harness → Log Aggregation → Feature Engineering → ML Model → CI Simulation
+
+### Pipeline Description
+
+1. **System Under Test (SUT)**  
+   A Node.js + Express application with controlled flakiness injection.
+
+2. **Playwright Tests**  
+   Stable and intentionally flaky test cases executed repeatedly.
+
+3. **Execution Harness**  
+   Automates multiple test executions and captures historical outcomes.
+
+4. **Log Aggregation**  
+   Consolidates execution results into structured datasets.
+
+5. **Feature Engineering**  
+   Extracts statistical signals such as failure rate, streak patterns, and variability.
+
+6. **Machine Learning Model**  
+   Trains supervised classifiers to predict flaky behavior.
+
+7. **CI Simulation**  
+   Evaluates how predictive detection improves CI pipeline stability.
+
+### Architecture Diagram
+
+![Experimental Pipeline Overview](docs/architecture.png)
+
+---
 
 ## Project Structure
 
