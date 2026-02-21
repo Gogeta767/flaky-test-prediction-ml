@@ -1,9 +1,23 @@
 # Machine Learning–Driven Flaky Test Detection in CI/CD Pipelines
 
 A reproducible experimental framework that applies supervised machine learning to detect and predict flaky tests in CI/CD environments.
+
 ![License](https://img.shields.io/github/license/srivastava-rajeev/flakiness-experiment-temp)
 ![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flakiness-experiment-temp)
 ![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flakiness-experiment-temp)
+
+## Why This Matters
+
+Flaky tests introduce instability in CI/CD pipelines, leading to false failures, reduced developer trust, and delayed releases. Traditional retry mechanisms mask the issue rather than solving it. This project demonstrates how machine learning can proactively detect flaky behavior and improve release confidence.
+
+## Architecture Overview
+
+1. Test Execution Data Collection
+2. Feature Engineering from historical test runs
+3. Supervised Model Training (XGBoost / Scikit-learn)
+4. Prediction & Evaluation
+5. Result Analysis
+
 # Detecting Flaky Tests Using Machine Learning in CI/CD Pipelines
 ```bash
 ✅ Problem Statement
