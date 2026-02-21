@@ -160,6 +160,11 @@ flakiness-experiment/
 - Seeded randomness for reproducibility.
 - Detailed documentation for setup and usage.
 
+To recreate the environment:
+```bash
+pip install -r requirements.txt
+```
+
 ## License
 
 MIT License
