@@ -1,3 +1,43 @@
+# Detecting Flaky Tests Using Machine Learning in CI/CD Pipelines
+✅ Problem Statement
+Explain:
+What are flaky tests?
+Why are they harmful in CI/CD?
+Cost impact
+✅ Objectives
+Detect flaky tests
+Engineer features from historical runs
+Train ML models
+Evaluate performance
+✅ Methodology
+Dataset description
+Feature extraction approach
+ML algorithms used
+Evaluation metrics
+✅ Tech Stack
+Python
+Playwright / Selenium
+GitHub Actions
+Pandas
+Scikit-learn
+XGBoost (if used)
+✅ How to Run
+Installation steps
+```bash
+   pip install -r requirements.txt
+   python train_model.py
+   ```
+✅ Results Section
+Include:
+Accuracy
+Precision/Recall
+Confusion matrix
+Any charts
+✅ Future Work
+Real-time CI integration
+Reinforcement learning
+Flakiness root-cause clustering
+
 # Flakiness Experiment
 
 This project is a research framework for studying test flakiness in CI/CD pipelines. It includes a System Under Test (SUT), a Playwright test suite, an execution orchestrator, and an ML pipeline for flakiness prediction.
