@@ -5,6 +5,7 @@ A reproducible experimental framework that applies supervised machine learning t
 ![License](https://img.shields.io/github/license/srivastava-rajeev/flakiness-experiment-temp)
 ![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flakiness-experiment-temp)
 ![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flakiness-experiment-temp)
+![CI](https://github.com/srivastava-rajeev/flakiness-experiment-temp/actions/workflows/python-ci.yml/badge.svg)
 
 ## Why This Matters
 
@@ -173,6 +174,21 @@ flakiness-experiment/
 - ML model training results are displayed in the terminal, including classification reports and ROC-AUC scores.
 
 ## Reproducibility
+## Quick Start
+
+### 1. Clone Repository
+git clone https://github.com/srivastava-rajeev/flakiness-experiment-temp.git
+cd flakiness-experiment-temp
+
+### 2. Create Virtual Environment
+python3 -m venv venv
+source venv/bin/activate
+
+### 3. Install Dependencies
+pip install -r requirements.txt
+
+### 4. Run Experiment
+python run_experiment.py
 
 - Configuration files for flakiness injection.
 - Seeded randomness for reproducibility.
@@ -182,6 +198,9 @@ To recreate the environment:
 ```bash
 pip install -r requirements.txt
 ```
+## Example Results
+
+![Confusion Matrix](images/confusion_matrix.png)
 
 ## License
 
