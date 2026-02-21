@@ -38,5 +38,26 @@ app.get('/api/data', async (req,res) => {
 // simple root
 app.get('/', (req,res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
+// API endpoint to serve test results
+app.get('/api/test-results', (req, res) => {
+  const testResultsPath = path.join(__dirname, '..', 'test-results', 'results.json');
+  if (fs.existsSync(testResultsPath)) {
+    const data = fs.readFileSync(testResultsPath, 'utf8');
+    res.json(JSON.parse(data));
+  } else {
+    res.status(404).json({ error: 'Test results not found' });
+  }
+});
+
+// API endpoint to serve orchestrator logs
+app.get('/api/orchestrator-logs', (req, res) => {
+  const logsDir = path.join(__dirname, '..', 'data', 'raw');
+  const logs = fs.readdirSync(logsDir).map(file => {
+    const content = fs.readFileSync(path.join(logsDir, file), 'utf8');
+    return { file, content };
+  });
+  res.json(logs);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('SUT listening on', port));

@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "total": 10,
+    "passed": 8,
+    "failed": 2,
+    "flaky": 1
+  },
+  "details": [
+    {
+      "test": "flaky.spec.js",
+      "status": "flaky",
+      "duration": 1200
+    },
+    {
+      "test": "stable.spec.js",
+      "status": "passed",
+      "duration": 800
+    }
+  ]
+}

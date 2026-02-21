@@ -2,7 +2,7 @@
   "name": "flakiness-experiment",
   "version": "1.0.0",
   "private": true,
-  "description": "An experimental framework for studying test flakiness in CI/CD pipelines.",
+  "description": "Controlled flakiness experiment scaffold: SUT (Express), Playwright tests, harness, and ML pipeline stubs.",
   "scripts": {
     "start": "node sut/server.js",
     "dev": "NODE_ENV=development nodemon sut/server.js",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "nodemon": "^3.1.14",
+    "nodemon": "^2.0.22",
     "playwright": "^1.35.0"
   }
 }

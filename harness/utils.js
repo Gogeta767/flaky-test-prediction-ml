@@ -1,35 +1,55 @@
-function tryParseJson(s) {
-  try { return JSON.parse(s); }
-  catch (e) {
-    const firstObj = s.indexOf('{');
-    const lastObj = s.lastIndexOf('}');
-    if (firstObj !== -1 && lastObj !== -1 && lastObj > firstObj) {
-      try { return JSON.parse(s.slice(firstObj, lastObj + 1)); } catch (e2) {}
+function tryParseJson(input) {
+  try {
+    return JSON.parse(input);
+  } catch (error) {
+    // Attempt to extract JSON object or array from the input string
+    const objectStart = input.indexOf('{');
+    const objectEnd = input.lastIndexOf('}');
+    if (objectStart !== -1 && objectEnd > objectStart) {
+      try {
+        return JSON.parse(input.slice(objectStart, objectEnd + 1));
+      } catch {}
     }
-    const firstArr = s.indexOf('[');
-    const lastArr = s.lastIndexOf(']');
-    if (firstArr !== -1 && lastArr !== -1 && lastArr > firstArr) {
-      try { return JSON.parse(s.slice(firstArr, lastArr + 1)); } catch (e3) {}
+
+    const arrayStart = input.indexOf('[');
+    const arrayEnd = input.lastIndexOf(']');
+    if (arrayStart !== -1 && arrayEnd > arrayStart) {
+      try {
+        return JSON.parse(input.slice(arrayStart, arrayEnd + 1));
+      } catch {}
     }
-    throw e;
+
+    // Throw the original error if parsing fails
+    throw error;
   }
 }
 
-function collectTestEntries(obj) {
-  const tests = [];
-  function walk(o, parents) {
-    if (!o) return;
-    if (Array.isArray(o)) return o.forEach(x => walk(x, parents));
-    if (typeof o === 'object') {
-      if (o.title && o.status) {
-        const full = parents.concat([o.title]).join(' > ');
-        tests.push({ title: full, status: o.status, duration: o.duration || null });
+function collectTestEntries(data) {
+  const testEntries = [];
+
+  function traverse(node, path) {
+    if (!node) return;
+
+    if (Array.isArray(node)) {
+      node.forEach(child => traverse(child, path));
+    } else if (typeof node === 'object') {
+      // Check if the node represents a test entry
+      if (node.title && node.status) {
+        const fullPath = path.concat(node.title).join(' > ');
+        testEntries.push({
+          title: fullPath,
+          status: node.status,
+          duration: node.duration || null,
+        });
       }
-      Object.keys(o).forEach(k => walk(o[k], parents.concat([k])));
+
+      // Recursively traverse child nodes
+      Object.keys(node).forEach(key => traverse(node[key], path.concat(key)));
     }
   }
-  walk(obj, []);
-  return tests;
+
+  traverse(data, []);
+  return testEntries;
 }
 
 module.exports = { tryParseJson, collectTestEntries };

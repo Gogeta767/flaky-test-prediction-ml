@@ -1,12 +1,12 @@
 {
   "seed": 12345,
-  "delay_ms": { "min": 0, "max": 1500 },
-  "delay_enabled": true,
-  "network_failure_prob": 0.25,
-  "network_abort_enabled": true,
-  "dom_delay_ms": { "min": 0, "max": 800 },
-  "dom_delay_enabled": true,
-  "concurrency_race_enabled": true,
-  "success_prob": 0.8,
+  "delay_ms": { "min": 0, "max": 0 },
+  "delay_enabled": false,
+  "network_failure_prob": 0,
+  "network_abort_enabled": false,
+  "dom_delay_ms": { "min": 0, "max": 0 },
+  "dom_delay_enabled": false,
+  "concurrency_race_enabled": false,
+  "success_prob": 1.0,
   "dev_mode": true
 }

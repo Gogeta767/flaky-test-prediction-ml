@@ -10,9 +10,24 @@ const config = require('../config/experiment.config.json');
 const runs = config.runs || 10;
 const { tryParseJson, collectTestEntries } = require('./utils');
 
-async function runOnce(i) {
+async function writeTestEntries(entries, ndjsonPath, runIndex) {
+  const stream = fs.createWriteStream(ndjsonPath, { flags: 'w' });
+  for (const entry of entries) {
+    const output = { run: runIndex, ts: Date.now(), ...entry };
+    stream.write(JSON.stringify(output) + '\n');
+  }
+  stream.end();
+  console.log(`[orchestrator] wrote ${entries.length} test entries to ${ndjsonPath}`);
+}
+
+function writeFallback(ndjsonPath, runIndex, note) {
+  const fallbackEntry = { run: runIndex, ts: Date.now(), note };
+  fs.writeFileSync(ndjsonPath, JSON.stringify(fallbackEntry) + '\n');
+}
+
+async function runOnce(runIndex) {
   return new Promise((resolve) => {
-    console.log('[orchestrator] starting run', i);
+    console.log('[orchestrator] starting run', runIndex);
     // use JSON reporter so we can parse structured results
     const cmd = 'npx playwright test --reporter=json';
     const p = exec(cmd, { maxBuffer: 1024 * 1024 * 20 });
@@ -20,10 +35,11 @@ async function runOnce(i) {
     p.stdout.on('data', (d) => { out += d; process.stdout.write(d); });
     p.stderr.on('data', (d) => { out += d; process.stderr.write(d); });
     p.on('close', (code) => {
-      const runId = String(i).padStart(3, '0');
+      const runId = String(runIndex).padStart(3, '0');
       const rawLogPath = path.join('data', 'raw', `run-${runId}.log`);
       const ndjsonPath = path.join('data', 'raw', `run-${runId}.ndjson`);
       fs.writeFileSync(rawLogPath, out);
+      console.log(`[orchestrator] wrote stdout to ${rawLogPath}`);
 
       // attempt to parse JSON output and write NDJSON per test
       try {
@@ -38,23 +54,15 @@ async function runOnce(i) {
         }
 
         if (entries.length > 0) {
-          const stream = fs.createWriteStream(ndjsonPath, { flags: 'w' });
-          for (const t of entries) {
-            const outObj = Object.assign({ run: i, ts: Date.now() }, t);
-            stream.write(JSON.stringify(outObj) + '\n');
-          }
-          stream.end();
-          console.log(`[orchestrator] wrote ${entries.length} test entries to ${ndjsonPath}`);
+          writeTestEntries(entries, ndjsonPath, runIndex);
         } else {
-          // fallback: write a single summary line
-          fs.writeFileSync(ndjsonPath, JSON.stringify({ run: i, ts: Date.now(), note: 'no-entries-parsed' }) + '\n');
+          writeFallback(ndjsonPath, runIndex, 'no-entries-parsed');
         }
       } catch (e) {
-        // parsing failed; write a failure marker
-        fs.writeFileSync(ndjsonPath, JSON.stringify({ run: i, ts: Date.now(), parse_error: String(e) }) + '\n');
+        writeFallback(ndjsonPath, runIndex, `parse_error: ${e.message}`);
       }
 
-      resolve({ run: i, code });
+      resolve({ run: runIndex, code });
     });
   });
 }

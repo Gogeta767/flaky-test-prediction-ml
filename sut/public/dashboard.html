@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flakiness Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            padding: 2rem;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+        .card h2 {
+            margin: 0 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flakiness Dashboard</h1>
+    </header>
+    <div class="container">
+        <div class="card">
+            <h2>Test Results</h2>
+            <div id="test-results">Loading...</div>
+        </div>
+        <div class="card">
+            <h2>Orchestrator Logs</h2>
+            <div id="orchestrator-logs">Loading...</div>
+        </div>
+    </div>
+    <script>
+        async function fetchData() {
+            const testResults = await fetch('/api/test-results').then(res => res.json());
+            const orchestratorLogs = await fetch('/api/orchestrator-logs').then(res => res.json());
+
+            document.getElementById('test-results').innerText = JSON.stringify(testResults, null, 2);
+            document.getElementById('orchestrator-logs').innerText = JSON.stringify(orchestratorLogs, null, 2);
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
