@@ -2,13 +2,13 @@
 
 A reproducible experimental framework that applies supervised machine learning to detect and predict flaky tests in CI/CD environments.
 
-![License](https://img.shields.io/github/license/srivastava-rajeev/flakiness-experiment-temp)
+![License](https://img.shields.io/github/license/srivastava-rajeev/flaky-test-prediction-ml)
 
-![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flakiness-experiment-temp)
+![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flaky-test-prediction-ml)
 
-![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flakiness-experiment-temp)
+![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flaky-test-prediction-ml)
 
-![CI](https://github.com/srivastava-rajeev/flakiness-experiment-temp/actions/workflows/python-ci.yml/badge.svg)
+![CI](https://github.com/srivastava-rajeev/flaky-test-prediction-ml/actions/workflows/python-ci.yml/badge.svg)
 
 ---
 ## About This Project
@@ -28,8 +28,24 @@ This project demonstrates how supervised machine learning can proactively detect
 - data/                # Test execution logs & synthetic datasets
 - feature_engineering/ # Feature extraction scripts
 - models/              # ML training & evaluation
-- ci_integration/      # CI/CD experiment scripts
+- ml/                  # Current ML training and aggregation scripts
 - notebooks/           # Exploratory analysis
+- posts/               # Draft markdown for research series posts
+
+## Research Series Roadmap
+
+This repository includes a 6-post research series with code-backed artifacts:
+
+1. [Post #1: Problem and ML approach](posts/post-01-problem-and-approach.md)
+2. [Post #2: Dataset and feature engineering](posts/post-02-dataset-feature-engineering.md)
+3. [Post #3: Modeling and evaluation](posts/post-03-modeling-and-evaluation.md)
+4. [Post #4: CI/CD integration strategy](posts/post-04-cicd-integration-strategy.md)
+5. [Post #5: Root causes of flaky tests](posts/post-05-root-causes-of-flaky-tests.md)
+6. [Post #6: Observability and test stability](posts/post-06-observability-and-test-stability.md)
+
+Foundation artifact:
+
+- [Minimal reproducible notebook](notebooks/flaky_test_prediction_baseline.ipynb): synthetic flaky/stable dataset generation, baseline Logistic Regression, printed metrics, and confusion matrix.
 
 ---
 
@@ -105,21 +121,26 @@ SUT → Playwright Tests → Execution Harness → Log Aggregation → Feature E
 
 ## Project Structure
 
-```
-flakiness-experiment/
+```text
+flaky-test-prediction-ml/
 ├── config/
 ├── data/
 │   └── raw/
+├── docs/
+├── feature_engineering/
 ├── harness/
 ├── ml/
 │   ├── aggregate_logs.py
-│   ├── train.py
+│   └── train.py
+├── models/
+├── notebooks/
+├── posts/
 ├── sut/
 ├── tests/
 │   └── playwright/
 ├── package.json
 ├── requirements.txt
-└── run_experiment.py
+└── README.md
 ```
 
 ---
@@ -141,8 +162,8 @@ flakiness-experiment/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/srivastava-rajeev/flakiness-experiment-temp.git
-cd flakiness-experiment-temp
+git clone https://github.com/srivastava-rajeev/flaky-test-prediction-ml.git
+cd flaky-test-prediction-ml
 ```
 
 ### 2. Setup Python Environment
@@ -160,19 +181,14 @@ npm install
 npx playwright install
 ```
 
-### 4. Run Full Experiment
+### 4. Run Current Pipeline
 
 ```bash
-python run_experiment.py
+node sut/server.js
+npx playwright test
+python3 ml/aggregate_logs.py
+python3 ml/train.py
 ```
-
-This will:
-
-- Start the SUT  
-- Execute Playwright tests multiple times  
-- Aggregate logs  
-- Train ML models  
-- Output evaluation metrics  
 
 ---
 
