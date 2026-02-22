@@ -1,0 +1,80 @@
+{
+  "dataset": {
+    "rows": 1200,
+    "train_rows": 900,
+    "test_rows": 300,
+    "positive_rate": 0.605,
+    "feature_columns": [
+      "fail_rate",
+      "retry_rate",
+      "duration_var_ms",
+      "duration_cv",
+      "max_fail_streak",
+      "network_latency_mean",
+      "cpu_load_mean"
+    ]
+  },
+  "models": {
+    "logistic_regression": {
+      "roc_auc": 0.6588049584474673,
+      "threshold_metrics": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.66,
+          "precision": 0.6536964980544747,
+          "recall": 0.9281767955801105,
+          "f1": 0.7671232876712328
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.6066666666666667,
+          "precision": 0.6863905325443787,
+          "recall": 0.6408839779005525,
+          "f1": 0.6628571428571428
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5233333333333333,
+          "precision": 0.8392857142857143,
+          "recall": 0.2596685082872928,
+          "f1": 0.39662447257383965
+        }
+      ],
+      "coefficients": {
+        "fail_rate": 0.6396179392221446,
+        "retry_rate": 0.3500362270133395,
+        "duration_var_ms": 0.23941919843451015,
+        "duration_cv": 0.07157412260350356,
+        "max_fail_streak": 0.13652655072424832,
+        "network_latency_mean": 0.3047717199131875,
+        "cpu_load_mean": 0.09910523532169992
+      }
+    },
+    "random_forest": {
+      "roc_auc": 0.6565300153210456,
+      "threshold_metrics": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.6266666666666667,
+          "precision": 0.6210526315789474,
+          "recall": 0.9779005524861878,
+          "f1": 0.759656652360515
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.6233333333333333,
+          "precision": 0.6683168316831684,
+          "recall": 0.7458563535911602,
+          "f1": 0.7049608355091384
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5566666666666666,
+          "precision": 0.8,
+          "recall": 0.35359116022099446,
+          "f1": 0.4904214559386973
+        }
+      ]
+    }
+  }
+}

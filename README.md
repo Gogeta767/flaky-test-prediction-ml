@@ -47,6 +47,19 @@ Foundation artifact:
 
 - [Minimal reproducible notebook](notebooks/flaky_test_prediction_baseline.ipynb): synthetic flaky/stable dataset generation, baseline Logistic Regression, printed metrics, and confusion matrix.
 
+Post #2 implementation artifacts:
+
+- `feature_engineering/generate_synthetic_logs.py` (run-level synthetic CI logs)
+- `feature_engineering/build_features.py` (per-test feature generation + flaky labeling)
+- `data/processed/synthetic_ci_runs.csv` (generated run-level dataset)
+- `data/processed/sample_features.csv` (sample feature table for modeling)
+
+Post #3 implementation artifacts:
+
+- `models/train_baselines.py` (Logistic Regression vs Random Forest training)
+- `models/evaluate.py` (threshold-oriented evaluation summary)
+- `models/results/baseline_metrics.json` (ROC-AUC + precision/recall metrics at multiple thresholds)
+
 ---
 
 ## Key Contributions
