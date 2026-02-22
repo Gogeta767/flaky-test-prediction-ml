@@ -1,10 +1,23 @@
 # Post #1: Why Flaky Tests Need ML in CI/CD
 
-## Problem Statement
-Flaky tests fail non-deterministically without code changes, slowing CI/CD and eroding trust in automation.
+## Hook
+Flaky tests are expensive because they look like product failures even when code is fine. Teams lose time in reruns and triage instead of shipping.
 
-## High-Level ML Approach
-Model flaky behavior from historical execution signals (failure rate, retries, duration variance) and predict flakiness probability per test.
+## Problem Statement
+A flaky test fails non-deterministically without meaningful code change. This creates false alarms, release friction, and low trust in CI signals.
+
+## Approach
+Use historical test execution behavior to estimate `p_flaky` per test and prioritize mitigation before instability spreads.
 
 ## Experimental Framing
-Use repeated controlled runs in a stable code baseline, construct labels from pass/fail variability, and compare baseline models with CI policy simulation.
+- Repeated runs under controlled conditions
+- Feature extraction from run-level logs
+- Binary flakiness labels from pass/fail variability
+- Model comparison + CI threshold simulation
+
+## Evidence in Repo
+- Roadmap and artifacts: `README.md`
+- Baseline notebook: `notebooks/flaky_test_prediction_baseline.ipynb`
+
+## CTA
+How does your team currently separate real regressions from flaky noise in CI?

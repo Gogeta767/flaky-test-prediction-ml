@@ -53,25 +53,30 @@ Post #2 implementation artifacts:
 - `feature_engineering/build_features.py` (per-test feature generation + flaky labeling)
 - `data/processed/synthetic_ci_runs.csv` (generated run-level dataset)
 - `data/processed/sample_features.csv` (sample feature table for modeling)
+- `docs/post-02-feature-table.md` (shareable feature snapshot table)
 
 Post #3 implementation artifacts:
 
-- `models/train_baselines.py` (Logistic Regression vs Random Forest training)
+- `models/train_baselines.py` (uses real feature table by default, with augmentation)
 - `models/evaluate.py` (threshold-oriented evaluation summary)
 - `models/results/baseline_metrics.json` (ROC-AUC + precision/recall metrics at multiple thresholds)
+- `docs/post-03-model-metrics.md` (shareable metrics table)
 
 Post #4 implementation artifacts:
 
 - `ci_integration/policy_simulator.py` (risk-threshold CI policy simulation)
 - `ci_integration/threshold_scenarios.csv` (threshold-by-threshold cost and confusion estimate)
+- `docs/post-04-threshold-analysis.md` (shareable threshold/cost table)
 
 Post #5 implementation artifacts:
 
 - `docs/root-causes-taxonomy.md` (engineering root-cause classes mapped to signals and mitigations)
+- `docs/post-05-root-cause-matrix.md` (shareable root-cause matrix)
 
 Post #6 implementation artifacts:
 
 - `notebooks/observability_signals.ipynb` (signal-driven ranking of unstable tests using logs/metrics proxies)
+- `docs/post-06-observability-ranking.md` (shareable observability signal table)
 
 ---
 
@@ -214,6 +219,16 @@ node sut/server.js
 npx playwright test
 python3 ml/aggregate_logs.py
 python3 ml/train.py
+```
+
+### 5. Build Research Artifacts
+
+```bash
+python3 feature_engineering/generate_synthetic_logs.py --runs 80
+python3 feature_engineering/build_features.py --input data/processed/synthetic_ci_runs.csv --output data/processed/sample_features.csv
+python3 models/train_baselines.py --dataset data/processed/sample_features.csv --samples 1200
+python3 ci_integration/policy_simulator.py --metrics models/results/baseline_metrics.json --model logistic_regression --output ci_integration/threshold_scenarios.csv
+pytest -q
 ```
 
 ---

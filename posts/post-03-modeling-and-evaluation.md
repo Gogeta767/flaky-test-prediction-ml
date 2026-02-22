@@ -1,35 +1,30 @@
 # Post #3: Evaluating Machine Learning Models for Flaky Test Detection
 
+## Hook
+Model choice alone is not the decision. Threshold policy determines real CI behavior.
+
 ## Models Compared
 - Logistic Regression
 - Random Forest
 
-## Why Simple Models Can Win
-For tabular CI features and limited data, linear models can be easier to calibrate and explain.
+## Why Simpler Models Still Matter
+Linear models are easier to calibrate and explain for tabular CI signals, especially when data is limited.
 
-In this repo:
+## Key Trade-Off
+- Higher precision: fewer unnecessary retries/quarantines
+- Higher recall: fewer unstable tests slipping through
 
+## Evidence in Repo
 - Training script: `models/train_baselines.py`
-- Evaluation summary: `models/evaluate.py`
+- Evaluation CLI: `models/evaluate.py`
 - Metrics artifact: `models/results/baseline_metrics.json`
-
-## Precision vs Recall in CI
-- Higher precision reduces unnecessary retries/quarantine.
-- Higher recall catches more flaky tests but can increase false positives.
-
-## CI Trade-off
-Tune thresholds based on pipeline cost of false positives versus false negatives.
-
-From current baseline run:
-
-- Logistic Regression (`t=0.50`): precision `0.686`, recall `0.641`
-- Random Forest (`t=0.50`): precision `0.668`, recall `0.746`
-- Logistic Regression (`t=0.70`): precision `0.839`, recall `0.260`
-
-This is why threshold policy matters more than a single default score.
+- Supporting table: `docs/post-03-model-metrics.md`
 
 ## Reproducible Commands
 ```bash
 python3 models/train_baselines.py --samples 1200
 python3 models/evaluate.py --metrics models/results/baseline_metrics.json
 ```
+
+## CTA
+Do you optimize your flaky detector for precision first or recall first, and why?

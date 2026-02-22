@@ -1,31 +1,29 @@
 # Post #5: The Engineering Causes Behind Flaky Tests in Modern Systems
 
-## Common Root Causes
+## Hook
+Prediction can route attention, but only root-cause fixes reduce long-term flakiness.
+
+## Core Root-Cause Classes
 - Async timing/race conditions
 - Shared mutable state
-- Network and dependency instability
-- Microservice startup/order issues
-- Brittle test design and weak isolation
+- Network/dependency instability
+- Microservice startup and environment drift
+- Brittle test design
 
-## Practical Direction
-Map each failure pattern to a remediation playbook and track recurrence.
+## Practical Framework
+For each flaky signature, map:
+- observable signals
+- likely cause class
+- explicit remediation pattern
 
-## Repo Artifact (Technical Depth)
-
-- Taxonomy doc: `docs/root-causes-taxonomy.md`
-
-The taxonomy links each root cause to:
-
-- observable signals (duration variance, retries, latency spikes, order dependence)
-- likely failure modes
-- concrete mitigation patterns
-
-## Why This Matters for Flaky Prediction
-
-Prediction flags unstable tests, but long-term reliability only improves when each predicted risk is mapped to a root-cause class and fixed at source.
+## Evidence in Repo
+- Taxonomy: `docs/root-causes-taxonomy.md`
+- Supporting matrix: `docs/post-05-root-cause-matrix.md`
 
 ## Example Mapping
+Signal: rising `duration_var_ms` + retry spikes  
+Cause class: race condition/timing instability  
+Fix: event-driven waits + deterministic synchronization points
 
-- Signal: rising `duration_var_ms` + retry spikes
-- Candidate cause: async timing/race conditions
-- Mitigation: event-based waits, deterministic synchronization points, and reduced concurrency coupling
+## CTA
+Which root-cause class is currently the biggest source of flaky failures in your org?

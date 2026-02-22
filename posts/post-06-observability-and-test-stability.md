@@ -1,31 +1,22 @@
 # Post #6: Observability Signals That Reveal Test Instability
 
-## Signals to Use
-- Logs: error signatures and retry traces
-- Metrics: failure rate and duration variance
-- Traces: cross-service timing anomalies
+## Hook
+Flaky behavior becomes actionable when logs, metrics, and timing signals are combined into a ranked stability view.
 
-## Stability Indicators
-Combine outcome volatility with latency variance and retry behavior to rank unstable tests.
+## Signal Stack
+- Logs: retry/error signatures
+- Metrics: fail rate, duration spread, retry rate
+- Timing context: latency and execution variance
 
-## Reliability Loop
-Prediction -> mitigation -> root-cause fix -> metric validation.
+## Instability Ranking
+Compute an `instability_score` and use it to prioritize tests for remediation instead of reacting to failures one by one.
 
-## Repo Artifact (Hands-On)
-
+## Evidence in Repo
 - Notebook: `notebooks/observability_signals.ipynb`
+- Supporting table: `docs/post-06-observability-ranking.md`
 
-The notebook computes an `instability_score` from:
+## Practical Loop
+Extract signals -> rank unstable tests -> map to root cause -> fix -> measure post-fix stability.
 
-- `fail_rate`
-- `retry_rate`
-- `duration_cv` (duration variability signal)
-- normalized `network_latency_mean`
-
-Then it ranks tests by instability to prioritize remediation.
-
-## Practical Use in CI
-
-1. Run signal extraction after each CI window.
-2. Track top unstable tests weekly.
-3. Feed top-ranked tests into root-cause triage and fix loops.
+## CTA
+If you had to track only 3 observability signals for flaky tests, which ones would you choose?

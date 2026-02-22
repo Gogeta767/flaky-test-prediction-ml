@@ -1,32 +1,23 @@
 # Post #4: Integrating Flaky Test Prediction into CI Pipelines
 
-## Where Prediction Runs
-- Post-test scoring from latest execution logs (recommended first)
-- Optional pre-test risk scoring for selective retries
+## Hook
+A good predictor can still hurt delivery if integrated with the wrong gating policy.
 
-## Probability Thresholding
-Use a configurable threshold `p_flaky >= t` to decide mitigation actions.
+## Integration Pattern
+Start with post-test scoring and soft actions before hard pipeline blocking.
 
-## Risk-Based Gating
-- High risk: retry/quarantine with alerts
-- Medium risk: allow run but flag
-- Low risk: normal policy
+## Threshold-Guided Actions
+- High risk (`p_flaky >= t_high`): retry/quarantine + alert
+- Medium risk: tag for triage, do not block merge by default
+- Low risk: normal CI path
 
-## Do Not Block Pipelines by Default
-Start with soft actions and observability before hard blocking.
+## Why Cost Modeling Matters
+In many CI systems, false negatives cost more than false positives. Threshold tuning should reflect that business cost.
 
-## Simulation Artifacts in This Repo
-
-- `ci_integration/policy_simulator.py`
-- `ci_integration/threshold_scenarios.csv`
-
-Current baseline simulation (Logistic Regression):
-
-- `t=0.30`: precision `0.6537`, recall `0.9282`, estimated policy cost `980.03`
-- `t=0.50`: precision `0.6864`, recall `0.6409`, estimated policy cost `1391.83`
-- `t=0.70`: precision `0.8393`, recall `0.2597`, estimated policy cost `1953.38`
-
-This shows that in a high false-negative-cost CI context, lower thresholds can reduce total disruption cost.
+## Evidence in Repo
+- Simulator: `ci_integration/policy_simulator.py`
+- Scenarios: `ci_integration/threshold_scenarios.csv`
+- Supporting table: `docs/post-04-threshold-analysis.md`
 
 ## Reproducible Command
 ```bash
@@ -35,3 +26,6 @@ python3 ci_integration/policy_simulator.py \
   --model logistic_regression \
   --output ci_integration/threshold_scenarios.csv
 ```
+
+## CTA
+Would your CI process accept soft-gating first, or do you need hard-gating from day one?

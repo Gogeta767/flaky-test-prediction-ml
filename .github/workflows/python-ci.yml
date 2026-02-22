@@ -24,3 +24,7 @@ jobs:
       - name: Validate environment
         run: |
           python --version
+
+      - name: Run tests
+        run: |
+          python -m pytest -q
